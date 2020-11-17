@@ -2,6 +2,7 @@ plugins {
 	id 'org.springframework.boot' version '2.3.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
 	id 'java'
+	id 'com.google.cloud.tools.jib' version '1.4.0'
 }
 
 group = 'com.example'
@@ -23,4 +24,16 @@ dependencies {
 
 test {
 	useJUnitPlatform()
+}
+
+bootJar {
+	baseName = 'service-1'
+	version = '0.1.0'
+}
+
+jib {
+	to {
+		image = "${bootJar.baseName}:${bootJar.version}"
+		tags  = ['latest']
+	}
 }

@@ -2,16 +2,13 @@ package com.example.cobb.controller;
 
 import com.example.cobb.services.ProducerClass;
 
-import org.apache.kafka.clients.admin.NewTopic;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("kafka")
+@RequestMapping("/kafka")
 public class KafkaController {
     
     private final ProducerClass producer;
@@ -26,8 +23,8 @@ public class KafkaController {
         return "Published successfully";
     }
 
-    @Bean
-    public NewTopic advicTopic() {
-        return new NewTopic("user", 3, (short) 1);
-    }
+    // @Bean
+    // public NewTopic advicTopic() {
+    //     return new NewTopic("user", 3, (short) 1);
+    // }
 }
