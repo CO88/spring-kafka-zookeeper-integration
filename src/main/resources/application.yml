@@ -3,9 +3,16 @@ server:
 
 spring:
   kafka:
+    bootstrap-servers: ${kafka_bootstrap_servers:192.168.200.128:9092}
+    properties:
+      sasl:
+        jaas:
+          config: org.apache.kafka.common.security.plain.PlainLoginModule required username=${kafka_username:'admin'} password=${kafka_password:'admin-secret'};
+        mechanism: PLAIN
+      security:
+        protocol: SASL_PLAINTEXT
     consumer: 
       #broker host
-      bootstrap-servers: 10.100.37.96:9092
       group-id: com.example
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
@@ -13,6 +20,8 @@ spring:
 
     producer:
       #broker host
-      bootstrap-servers: 10.100.37.96:9092
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+    jass:
+      enabled: true

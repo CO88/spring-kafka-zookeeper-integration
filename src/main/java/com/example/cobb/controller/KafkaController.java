@@ -18,13 +18,10 @@ public class KafkaController {
     }
 
     @PostMapping(value = "/publish")
-    public String sendMessage(@RequestParam("message") String message) {
-        this.producer.sendMessage(message);
+    public String sendMessage(
+        @RequestParam("message") String message,
+        @RequestParam("topic") String topic) {
+        this.producer.sendMessage(topic, message);
         return "Published successfully";
     }
-
-    // @Bean
-    // public NewTopic advicTopic() {
-    //     return new NewTopic("user", 3, (short) 1);
-    // }
 }
