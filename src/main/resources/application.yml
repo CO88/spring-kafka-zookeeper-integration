@@ -5,8 +5,9 @@ spring:
   kafka:
     # 로컬호스트일때, could not be established. Broker may not be avaliable. 
     # 나는 이유 찾아봐야합니다.
+    # --> spring boot 컨테이너 안에서 localhost라 kafka broker에 연결할 수가 없음. 
     # bootstrap-servers: ${kafka_bootstrap_servers:localhost:9092}
-    bootstrap-servers: ${kafka_bootstrap_servers:localhost:9093}
+    bootstrap-servers: 192.168.200.128:9092
     properties:
       sasl:
         jaas:
@@ -25,6 +26,12 @@ spring:
       #broker host
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      retries: 2
 
     jaas:
       enabled: true
+    listener:
+      poll-timeout: 1800000
+      concurrency: 1
+      ack-mode: manual_immediate
+

@@ -1,6 +1,6 @@
 package com.example.cobb.controller;
 
-import com.example.cobb.services.ProducerClass;
+import com.example.cobb.transporters.Producer;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/kafka")
 public class KafkaController {
     
-    private final ProducerClass producer;
+    private final Producer producer;
 
-    public KafkaController(ProducerClass producer) {
+    public KafkaController(Producer producer) {
         this.producer = producer;
     }
 
